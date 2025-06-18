@@ -1,26 +1,10 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright 2020. Huawei Technologies Co., Ltd. All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#    http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import urllib
-from urllib.parse import urlencode
 import json
 import time
 
-from push_admin import _http
-from push_admin import _message_serializer
+from hpa import _http
+from hpa import _message_serializer
+from urllib.parse import urlencode
 
 
 class App(object):
@@ -44,8 +28,13 @@ class App(object):
         except Exception as e:
             raise ApiCallError('caught exception when send. {0}'.format(e))
 
-    def __init__(self, app_id, app_secret, token_server='https://oauth-login.cloud.huawei.com/oauth2/v2/token',
-                 push_open_url='https://push-api.cloud.huawei.com'):
+    def __init__(
+        self, 
+        app_id, 
+        app_secret, 
+        token_server='https://oauth-login.cloud.huawei.com/oauth2/v2/token',
+        push_open_url='https://push-api.cloud.huawei.com'
+    ):
         """class init"""
         self.app_id = app_id
         self.app_secret = app_secret

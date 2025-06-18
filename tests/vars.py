@@ -1,0 +1,5 @@
+app_id = ''
+app_secret = ''
+token_server = 'https://oauth-login.cloud.huawei.com/oauth2/v2/token'
+push_open_api = 'https://push-api.cloud.huawei.com'
+test_device_token = ''

@@ -1,23 +1,7 @@
-# -*-coding:utf-8-*-
-#
-# Copyright 2020. Huawei Technologies Co., Ltd. All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#    http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+import hpa
 
-from push_admin import _messages, _app
-import push_admin
+from hpa import _messages, _app
 
-"""HUAWEI Cloud Messaging module."""
 
 """ General Data structure """
 Message = _messages.Message
@@ -61,7 +45,7 @@ def send_message(message, validate_only=False, app_id=None):
             ApiCallError: If an error occurs while sending the message to the HCM service.
     """
     try:
-        response = push_admin.get_app(app_id).send(message, validate_only)
+        response = hpa.get_app(app_id).send(message, validate_only)
         return SendResponse(response)
     except Exception as e:
         raise ApiCallError(repr(e))
@@ -74,7 +58,7 @@ def subscribe_topic(topic, token_list, app_id=None):
     :param app_id: application ID
     """
     try:
-        response = push_admin.get_app(app_id).subscribe_topic(topic, token_list)
+        response = hpa.get_app(app_id).subscribe_topic(topic, token_list)
         return TopicSubscribeResponse(response)
     except Exception as e:
         raise ApiCallError(repr(e))
@@ -87,7 +71,7 @@ def unsubscribe_topic(topic, token_list, app_id=None):
     :param app_id: application ID
     """
     try:
-        response = push_admin.get_app(app_id).unsubscribe_topic(topic, token_list)
+        response = hpa.get_app(app_id).unsubscribe_topic(topic, token_list)
         return TopicSubscribeResponse(response)
     except Exception as e:
         raise ApiCallError(repr(e))
@@ -99,7 +83,7 @@ def list_topics(token, app_id=None):
     :param app_id: application ID
     """
     try:
-        response = push_admin.get_app(app_id).query_subscribe_list(token)
+        response = hpa.get_app(app_id).query_subscribe_list(token)
         return TopicQueryResponse(response)
     except Exception as e:
         raise ApiCallError(repr(e))
@@ -207,9 +191,11 @@ class TopicQueryResponse(BaseTopicResponse):
            "code": "80000000",
            "requestId": "157466350121600008000701",
            "topics": [
-                       { "name": "sports",
-                         "addDate": "2019-11-25"
-                         } ]
+                { 
+                    "name": "sports",
+                    "addDate": "2019-11-25"
+                } 
+            ]
          }
     """
     def __init__(self, json_rsp=None):
