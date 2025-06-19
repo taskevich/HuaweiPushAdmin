@@ -24,7 +24,6 @@ android = messaging.AndroidConfig(
     collapse_key=-1,
     urgency=messaging.AndroidConfig.HIGH_PRIORITY,
     ttl="10000s",
-    bi_tag='the_sample_bi_tag_for_receipt_service',
     notification=android_notification
 )
 
